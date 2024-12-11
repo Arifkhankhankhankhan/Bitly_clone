@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitly Clone</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f0f4f7;
+            color: #333;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        table {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Bitly Clone</h2>
+        <p>Convert Long URL to Short URL with a Single Click</p>
+
+        <form action="/shortUrl" method="post">
+            <div class="form-group">
+                <input type="url" required name="fullUrl" placeholder="Enter Long URL" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="submit" class="form-control btn btn-primary" value="Shorten URL">
+            </div>
+        </form>
+ 
+      
+
+        <% if (results) { %>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Full URL</th>
+                    <th>Short URL</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% results.forEach(result => { %>
+                <tr>
+                    <td><%= result.fullUrl %></td>
+                    <td><a href="<%=`/${result.shortUrl}` %>" target="_blank"><%= result.shortUrl %></a></td>
+                    <td><%= result.counts %></td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+        <% } else { %>
+        <p>No URLs found!</p>
+        <% } %>
+    </div>
+</body>
+</html>
